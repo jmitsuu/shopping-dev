@@ -36,10 +36,12 @@ const selectedProduct = computed(() => {
 
 <template>
   <section class="min-h-screen py-10 flex flex-col justify-center items-center bg-slate-50">
+
     <div class="mx-auto container border-[0.1rem] rounded-md p-3 bg-white">
+      <h1 class="text-center text-5xl font-bold text-gray-700 uppercase m-5">Produto</h1>
       <div
-        class="xl:w-2/4 mx-auto justify-center items-center border-[0.1rem] flx xl:flex rounded-md mt-4 xl:pl-10 xl:pt-9 p-4">
-        <img :src="selectedProduct.image_url" class="h-56 mx-auto w-56" />
+        class="xl:w-2/4 mx-auto justify-center items-center border-[0.1rem]  flx xl:flex rounded-md mt-4 xl:pl-10 xl:pt-9 p-4">
+        <img :src="selectedProduct.image_url" class="h-full mx-auto w-56" />
         <div class="xl:ml-10 w-full">
           <h1 class="text-gray-700 xl:text-[1.8rem] text-center font-semibold">
             {{ selectedProduct.title }}

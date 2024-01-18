@@ -8,13 +8,17 @@ import Footer from './components/Footer.vue';
 </script>
 
 <template>
- <Menu />
-  
-  <div class="min-h-screen bg-slate-10 ">
+  <main class="">
+
+
+  <Menu />
+
+  <div class="min-h-screen bg-white ">
     <RouterView />
   </div>
 
-  <Footer/>
+  <Footer />
+</main>
 </template>
 
 <style scoped></style>
