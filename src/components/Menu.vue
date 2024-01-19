@@ -6,11 +6,12 @@ import { ref, onMounted } from "vue";
 import { onClickOutside } from '@vueuse/core';
 import instance from '../http/getUrl';
 import { useProduct } from '../stores/storeProducts';
+// import { name, userToJson } from "../helpers/credentials";
 const modal = ref(false);
 const target = ref(null);
 const targetMenu = ref(null)
-const name = ref('');
-const logged = ref();
+const name = ref('')
+const logged = ref(false);
 const acessLevel = ref();
 const modalBar = ref(false)
 onClickOutside(target, (event) => modal.value = false)
@@ -19,19 +20,25 @@ if (window.location.reload) {
   modal.value = false
 }
 async function getCredentials() {
+
   const getUserLocal = localStorage.getItem('credentials');
-  const userToJson = JSON.parse(getUserLocal)
-  if (!userToJson) return;
-  name.value = userToJson.userName;
-  logged.value = userToJson.verifyUser;
+
+  const  userToJson= JSON.parse(getUserLocal)
+    if (!userToJson) return;
+    name.value = userToJson.userName;
+  if ( name.value) {
+    logged.value = true
+
+  }
+ 
+  const { tokenLocal } = userToJson.value
   const { data } = await instance.get('/admin', {
     headers: {
-      'authorization': userToJson.tokenLocal
+      'authorization': tokenLocal
     }
   });
 
   const acess = data.find(i => i.acess_level);
-
   if (acess.acess_level === 3)
     acessLevel.value = true;
 
@@ -67,8 +74,10 @@ onMounted(() => {
           </h1>
           <div ref="target" v-if="modal" @mouseleave="modal = false"
             class="absolute top-8 gap-3 text-slate-800 flex flex-col z-50 bg-white border-2 rounded-md py-2 px-4">
-            <RouterLink :to="{ path: '/clothes', query: { gender: 'male' } }" @click="modal = false">Masculino</RouterLink>
-            <RouterLink :to="{ path: '/clothes', query: { gender: 'female' } }" @click="modal = false">Feminino</RouterLink>
+            <RouterLink :to="{ path: '/clothes', query: { gender: 'male' } }" @click="modal = false">Masculino
+            </RouterLink>
+            <RouterLink :to="{ path: '/clothes', query: { gender: 'female' } }" @click="modal = false">Feminino
+            </RouterLink>
           </div>
         </div>
         <RouterLink to="/">Sobre nós</RouterLink>
@@ -93,8 +102,10 @@ onMounted(() => {
           <div ref="target" v-if="modal" @mouseleave="modal = false"
             class="absolute bg-white border-2 top-5  gap-3 text-slate-800 flex flex-col z-50  rounded-md py-2 px-4">
 
-            <RouterLink :to="{ path: '/clothes', query: { gender: 'male' } }" @click="modal = false">Masculino</RouterLink>
-            <RouterLink :to="{ path: '/clothes', query: { gender: 'female' } }" @click="modal = false">Feminino</RouterLink>
+            <RouterLink :to="{ path: '/clothes', query: { gender: 'male' } }" @click="modal = false">Masculino
+            </RouterLink>
+            <RouterLink :to="{ path: '/clothes', query: { gender: 'female' } }" @click="modal = false">Feminino
+            </RouterLink>
 
           </div>
         </div>
@@ -112,5 +123,4 @@ onMounted(() => {
 
     </div>
 
-  </header>
-</template>
+</header></template>
