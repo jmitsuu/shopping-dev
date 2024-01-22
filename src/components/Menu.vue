@@ -23,14 +23,14 @@ async function getCredentials() {
 
   const getUserLocal = localStorage.getItem('credentials');
 
-  const  userToJson= JSON.parse(getUserLocal)
-    if (!userToJson) return;
-    name.value = userToJson.userName;
-  if ( name.value) {
+  const userToJson = JSON.parse(getUserLocal)
+  if (!userToJson) return;
+  name.value = userToJson.userName;
+  if (name.value) {
     logged.value = true
 
   }
- 
+
   const { tokenLocal } = userToJson.value
   const { data } = await instance.get('/admin', {
     headers: {
@@ -123,4 +123,5 @@ onMounted(() => {
 
     </div>
 
-</header></template>
+  </header>
+</template>
