@@ -4,6 +4,7 @@ import { useScroll } from '@vueuse/core';
 import { ShoppingCartIcon, UserIcon } from '@heroicons/vue/24/solid';
 import { name } from "../helpers/credentials";
 import { useCart } from "../stores/cart"
+import  Sucess from "../components/notifications/Sucess.vue"
 const store = useCart()
 const scroll = ref(false);
 // const name = ref('')
@@ -22,9 +23,15 @@ window.addEventListener('scroll', handleScroll)
 </script>
 <template>
     <main class="relative flex justify-center items-center">
+      
         <Transition>
+        
             <div v-if="scroll"
-                class="fixed z-50  bottom-8 h-20 w-[600px] justify-center gap-10 p-4 items-center flex rounded-md border-2 bg-[#F8F8FF] shadow-xl">
+                class="fixed z-50  bottom-8 h-20 w-[600px] justify-center gap-10 p-4 items-center flex  rounded-md border-2 bg-[#F8F8FF] shadow-xl">
+                <Transition>
+                    <Sucess v-if="store.notification"  :title="'Sucesso'" :message="'Produto adicionado ao carrinho'"  class="absolute z-50 w-full h-full rounded-sm transition-all"/>
+                </Transition>
+              
                 <h2 class="left-8 absolute"> {{ name }}</h2>
                 <UserIcon class="h-6 cursor-pointer text-orange-600 hover:text-orange-200" />
                 <div class="flex relative ">

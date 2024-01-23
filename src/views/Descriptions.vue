@@ -7,7 +7,7 @@ import {
 } from "@heroicons/vue/24/solid";
 import axios from "axios";
 const store = useProduct();
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute()
@@ -26,12 +26,19 @@ const priceSplit = ref();
 // getCep();
 
 
-
-const selectedProduct = computed(() => {
+const selectedProduct = computed( () => {
   window.scrollTo(0, 0);
+  if(window.location.reload){
+   store.getApi()
+}
+
   return store.responseUrl.find((item) => item._id === route.params.id)
+
 })
 
+onMounted( async ()=>{
+
+})
 </script>
 
 <template>

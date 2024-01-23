@@ -4,6 +4,7 @@ import { useProduct } from "../stores/storeProducts";
 import { useRouter } from "vue-router";
 import { ShoppingCartIcon} from '@heroicons/vue/24/solid';
 import {useCart} from "../stores/cart";
+
 const storeCart = useCart()
 const store = useProduct();
 const router = useRouter()
@@ -30,6 +31,7 @@ const goToDescriptions = (id) => {
 
   <div v-else 
     class="flex h-[400px]  border-[0.1em] hover:shadow-md transition duration-300 p-4 rounded-md text-center flex-col">
+   
     <img :src="props.img" class="rounded-lg mx-auto h-full border-[0.1rem] cursor-pointer hover:scale-105 transition-all" @click="goToDescriptions(id)" />
     <div class="flex flex-col items-center ">
       <p class="text-gray-600 text-xs xl:text-[1.0rem]">
