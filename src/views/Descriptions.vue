@@ -32,7 +32,7 @@ const selectedProduct = computed( () => {
    store.getApi()
 }
 
-  return store.responseUrl.find((item) => item._id === route.params.id)
+  return store.responseUrl.find((item) => item._id === Number(route.params.id))
 
 })
 

@@ -6,6 +6,9 @@ import { ref, onMounted } from "vue";
 import { onClickOutside } from '@vueuse/core';
 import instance from '../http/getUrl';
 import { useProduct } from '../stores/storeProducts';
+import {useCart} from "../stores/cart"
+import Sucess from "./notifications/Sucess.vue"
+import { userToJson } from '../helpers/credentials';
 // import { name, userToJson } from "../helpers/credentials";
 const modal = ref(false);
 const target = ref(null);
@@ -13,7 +16,8 @@ const targetMenu = ref(null)
 const name = ref('')
 const logged = ref(false);
 const acessLevel = ref();
-const modalBar = ref(false)
+const modalBar = ref(false);
+const store = useCart()
 onClickOutside(target, (event) => modal.value = false)
 onClickOutside(targetMenu, (event) => modalBar.value = false)
 if (window.location.reload) {
@@ -31,17 +35,25 @@ async function getCredentials() {
 
   }
 
-  const { tokenLocal } = userToJson.value
   const { data } = await instance.get('/admin', {
     headers: {
-      'authorization': tokenLocal
+      'authorization':userToJson.tokenLocal
     }
   });
 
-  const acess = data.find(i => i.acess_level);
-  if (acess.acess_level === 3)
+data.forEach(el =>{
+  if(el.token === userToJson.tokenLocal){
     acessLevel.value = true;
+  }
+})
 
+if(userToJson.tokenLocal){
+    setTimeout(() => {
+        localStorage.clear('credentials');
+        window.location.reload()
+      }, 36000000);
+   
+  }
 }
 
 async function logout() {
@@ -49,21 +61,25 @@ async function logout() {
   setTimeout(() => {
     window.location.reload()
   }, 300);
-  localStorage.clear('credentials')
+  localStorage.clear('credentials');
+
 }
 
+
 onMounted(() => {
+
   getCredentials()
 })
 
 </script>
 <template>
-  <header class="w-full h-20  z-50 border-b-2 bg-[#F8F8FF]">
+  <header class="w-full h-20 relative  z-50 border-b-2 bg-[#F8F8FF]">
     <div class="xl:flex w-full h-full justify-center items-center">
       <h2 v-if="name"> Olá, {{ name }} </h2>
       <div>
         <Bars4Icon class="h-10 absolute xl:hidden" @click="modalBar = !modalBar" />
       </div>
+      <Sucess v-if="store.notification"  :title="'Sucesso'" :message="'Produto adicionado ao carrinho'"  class="fixed z-50 top-40 left-12 shadow-md  h-20 rounded-sm transition-all"/>
       <nav class=" hidden xl:flex relative w-full container h-full  text-slate-800   justify-center items-center gap-5 ">
         <RouterLink class="" to="/">Home</RouterLink>
         <div class="relative flex items-center gap-1">

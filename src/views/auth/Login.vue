@@ -30,17 +30,22 @@ async function singIn() {
       },
     });
     if (data.status === 200) {
-      store.credentials(data.data.name, data.data.auth, data.data.acess_level, data.data.token);
-      userMessage.value = data.data.message;
+      localStorage.setItem(
+      "credentials",
+      JSON.stringify({ userName: data.data.userName, tokenLocal: data.data.token })
+    );
 
+    userMessage.value = data.data.message
       setTimeout(() => {
         window.location.href = '/'
       }, 1100);
+ 
     }
   } catch ({ response }) {
-    userMessage.value = response.data.message;
+    userMessage.value = response.data.message
   }
 }
+
 </script>
 <template>
   <main class="container m-auto flex  p-4 gap-10 pt-20 relative">

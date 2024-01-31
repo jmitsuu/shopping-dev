@@ -10,7 +10,8 @@ export const useProduct = defineStore("useProduct", () => {
   const verifyUserAdm = ref(false);
   const verifyUser = ref();
   const userName = ref("");
-  const token = ref('')
+  const token = ref('');
+  const checkLogin = ref()
 
 //token Temporario
  function getLocal(){
@@ -62,14 +63,11 @@ try {
     });
     getApi();
   }
-  function credentials(name, auth, level, token) {
-  
-    if(level === 3 && token){
-      verifyUserAdm.value =true;
-    }
+  function credentials(name, token) {
+    console.log(name, token)
     localStorage.setItem(
       "credentials",
-      JSON.stringify({ userName: name, verifyUser: auth, acess_level:level, tokenLocal:token })
+      JSON.stringify({ userName: name, tokenLocal:token })
     );
     const getCredentials = localStorage.getItem("credentials");
   
@@ -77,8 +75,7 @@ try {
     if (!userLocal) return;
   
 
-   
-    
+  
   }
 
   return {
@@ -92,5 +89,6 @@ try {
     userName,
     verifyUserAdm,
     verifyUser,
+ 
   };
 });

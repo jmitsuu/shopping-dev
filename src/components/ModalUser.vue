@@ -29,7 +29,7 @@ window.addEventListener('scroll', handleScroll)
             <div v-if="scroll"
                 class="fixed z-50  bottom-8 h-20 w-[600px] justify-center gap-10 p-4 items-center flex  rounded-md border-2 bg-[#F8F8FF] shadow-xl">
                 <Transition>
-                    <Sucess v-if="store.notification"  :title="'Sucesso'" :message="'Produto adicionado ao carrinho'"  class="absolute z-50 w-full h-full rounded-sm transition-all"/>
+                  
                 </Transition>
               
                 <h2 class="left-8 absolute"> {{ name }}</h2>

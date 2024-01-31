@@ -9,7 +9,8 @@ const userPassword = ref();
 const confirmPassword = ref();
 const showpassord = ref(false);
 const alert = ref();
-const userInvalid = ref()
+const userInvalid = ref();
+const userMessage = ref()
 async function register() {
   if (userPassword.value !== confirmPassword.value) {
     alert.value = true;
@@ -29,14 +30,17 @@ async function register() {
           "Content-Type": "application/json",
         },
       });
-      console.log(data);
+      userMessage.value = "Usuario criado com sucesso";
+     setTimeout(() => {
+      window.location.href = "/auth/acesso"
+     }, 3000);
     } catch (error) {
-      console.log(error.message);
-      const {data} = error.response
-      userInvalid.value = data.message;
+      console.log(error);
+      const {response} = error
+      userMessage.value = response.data.message;
       console.log()
       setTimeout(() => {
-        userInvalid.value =''
+        userMessage.value =''
       }, 4000);
     }
   }
@@ -124,7 +128,7 @@ async function register() {
           Voltar
         </button>
       </RouterLink>
- <Alert v-if="userInvalid" :message="userInvalid" />
+
     </div>
   </main>
 </template>
