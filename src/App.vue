@@ -2,7 +2,7 @@
 import { RouterLink, RouterView } from 'vue-router'
 import Menu from './components/Menu.vue';
 import Footer from './components/Footer.vue';
-import ModalUser from "./components/ModalUser.vue";
+
 import Cart from "./components/Cart.vue";
 
 
@@ -10,18 +10,14 @@ import Cart from "./components/Cart.vue";
 
 <template>
   <main class="">
-
+    <Menu />
     <Cart />
-  <Menu />
- 
-  <div class="min-h-screen bg-white ">
-  
-    <ModalUser />
-    <RouterView />
-  </div>
+    <div class="min-h-screen mt-5 bg-white ">
+      <RouterView />
+    </div>
 
-  <Footer />
-</main>
+    <Footer />
+  </main>
 </template>
 
 <style scoped></style>

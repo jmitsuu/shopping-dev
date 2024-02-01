@@ -28,12 +28,12 @@ onMounted(async () => {
     :transition="900"
     :autoplay="3000"
     :wrapAround="true"
-    class=" m-auto mt-5 container  "
+    class=" m-auto pt-20  container  "
   >
     <slide v-for="slide in slides" :key="slide">
    
         <img class=" xl:h-[500px] md:h-[300px] w-full object-cover
-         h-[200px]  " :src="slide" />
+         h-[300px]  " :src="slide" />
    
     </slide>
   </carousel>

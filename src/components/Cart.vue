@@ -12,7 +12,8 @@ onClickOutside(target, (event) => (store.modalCart = false));
     <aside
       v-if="store.modalCart"
       ref="target"
-      class="fixed right-0 flex flex-col  p-8 items-center w-96 z-50 h-screen rounded-md border-l-2 bg-white shadow-xl"
+      class="fixed right-0 flex flex-col  top-0 p-8 items-center max-w-96 z-50 h-screen rounded-md border-l-2 bg-white shadow-xl"
+      :class="!store.countCart ? 'hidden' : ''"
     >
       <XMarkIcon
         class="h-7 absolute top-3 left-3 cursor-pointer"

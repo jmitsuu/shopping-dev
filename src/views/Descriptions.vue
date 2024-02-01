@@ -205,11 +205,6 @@ onMounted(async () => {
             </div>
           </div>
             <div class="flex flex-col mt-10">
-              <!-- <button
-                class="p-4 border-2 mx-auto text-gray-700 bg-gray-50 rounded-sm hover:bg-gray-400 hover:text-white rounde-md"
-              >
-                Carregar Mais
-              </button> -->
               <RouterLink
                 to="/auth/acesso"
                 class="m-auto mt-4"
@@ -218,14 +213,14 @@ onMounted(async () => {
               >
               <button
                 v-else
-                class="text-xl font-bold uppercase p-2 mt-4 bg-black text-white w-96 m-auto hover:bg-black/60"
+                class="text-xl font-bold uppercase p-2 mt-4 bg-black text-white max-w-96 m-auto hover:bg-black/60"
                 @click="modalComments = !modalComments"
               >
                 Quero Avaliar esse produto
               </button>
               <div
                 v-if="modalComments"
-                class="h-full w-full mt-2 p-4 rounded-md border-[0.1rem]"
+                class="h-full w-full mt-2  xl:p-4 rounded-md border-[0.1rem]"
               >
                 <div class="flex p-2 gap-2">
                   <div
