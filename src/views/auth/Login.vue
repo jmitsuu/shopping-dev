@@ -32,7 +32,7 @@ async function singIn() {
     if (data.status === 200) {
       localStorage.setItem(
       "credentials",
-      JSON.stringify({ userName: data.data.userName, tokenLocal: data.data.token })
+      JSON.stringify({ userName: data.data.userName, tokenLocal: data.data.token, id:data.data.id_user })
     );
 
     userMessage.value = data.data.message

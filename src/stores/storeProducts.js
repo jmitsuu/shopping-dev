@@ -9,15 +9,18 @@ export const useProduct = defineStore("useProduct", () => {
   const skeletonLoad = ref(false);
   const verifyUserAdm = ref(false);
   const verifyUser = ref();
-  const userName = ref("");
+  const userToken = ref("");
   const token = ref('');
-  const checkLogin = ref()
+  const checkLogin = ref();
+  const credentials = ref()
 
 //token Temporario
  function getLocal(){
   const jsonToken = localStorage.getItem('credentials')
   if(!jsonToken) return;
-  token.value = JSON.parse(jsonToken).tokenLocal
+  token.value = JSON.parse(jsonToken).tokenLocal,
+  credentials.value = JSON.parse(jsonToken)
+
  
  }
  getLocal()
@@ -63,32 +66,19 @@ try {
     });
     getApi();
   }
-  function credentials(name, token) {
-    console.log(name, token)
-    localStorage.setItem(
-      "credentials",
-      JSON.stringify({ userName: name, tokenLocal:token })
-    );
-    const getCredentials = localStorage.getItem("credentials");
-  
-    const userLocal = JSON.parse(getCredentials);
-    if (!userLocal) return;
-  
 
-  
-  }
 
   return {
     infoProduct,
     getApi,
-    credentials,
     postProduct,
     deleteProduct,
     responseUrl,
     skeletonLoad,
-    userName,
     verifyUserAdm,
     verifyUser,
+    token,
+    credentials,
  
   };
 });
