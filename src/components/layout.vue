@@ -1,9 +1,10 @@
 <script setup>
-
+import Footer from "./Footer.vue"
 
 </script>
 <template>
-  <div class="container mx-auto mt-2 ">
+  <main>
+    <div class="container mx-auto mt-2 ">
     <slot name="scope"></slot>
   </div>
   <div
@@ -11,5 +12,11 @@
     <div class="grid xl:grid-cols-4 grid-cols-1 md:grid-cols-2 sm:grid-cols-1 gap-5">
       <slot name="prod"></slot>
     </div>
+
   </div>
+  <Footer />
+
+  </main>
+
+
 </template>

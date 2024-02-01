@@ -17,10 +17,11 @@ const inputCep = ref("88113500");
 const dataLocal = ref();
 const priceSplit = ref();
 const comments = ref();
-const voteUser = ref();
+const voteUser = ref(0);
 const inputVote = ref();
 const inputComment = ref();
 const modalComments = ref();
+const totalLength = ref()
 // async function getCep() {
 //   const { data } = await axios.get(
 //     `https://viacep.com.br/ws/${inputCep.value.trim().replace("-", "")}/json/`
@@ -40,9 +41,14 @@ const selectedProduct = computed(() => {
 async function getComments() {
   const { data } = await instance(`comments/${route.params.id}`);
   comments.value = data || null;
-  comments.value.forEach((el) => {
-    voteUser.value = el.voto;
-  });
+const total = comments.value.map((el) =>  el.voto);
+totalLength.value = data.length;
+console.log(totalLength.value)
+for(let i = 0; i < total.length; i++ ){
+  voteUser.value += total[i]
+  console.log(voteUser.value)
+}
+
 }
 async function insertComment() {
   const body = {
@@ -87,6 +93,9 @@ onMounted(async () => {
           <h1 class="text-gray-700 xl:text-[1.8rem] text-center font-semibold">
             {{ selectedProduct.title }}
           </h1>
+          <div>
+            <h3>Nota: {{ voteUser/totalLength }}</h3>
+          </div>
 
           <h1 class="mt-4 text-[2.5rem] font-bold text-red-800">
             {{ selectedProduct.price }} R$
@@ -303,4 +312,7 @@ onMounted(async () => {
   </section>
 </template>
 
-<style></style>
+<style scoped>
+
+
+</style>

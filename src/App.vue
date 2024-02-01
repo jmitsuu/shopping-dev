@@ -16,8 +16,9 @@ import Cart from "./components/Cart.vue";
       <RouterView />
     </div>
 
-    <Footer />
+
   </main>
+
 </template>
 
 <style scoped></style>

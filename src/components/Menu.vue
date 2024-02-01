@@ -73,9 +73,9 @@ onMounted(() => {
 <template>
   <header class="w-full h-20 fixed -mt-5 z-50  bg-black">
     <div class="xl:flex w-full h-full  justify-center items-center">
-      <h2 v-if="name" class="hidden xl:block"> Olá, {{ name }} </h2>
+      <h2 v-if="name" class="hidden xl:block text-slate-300"> Olá, <span class="text-orange-600">{{ name }}</span> </h2>
       <div>
-        <I.Bars4Icon class="h-10 mt-5 cursor-pointer absolute xl:hidden"  @click="modalBar = !modalBar" />
+        <I.Bars4Icon class="h-10 mt-5 cursor-pointer absolute xl:hidden text-white"  @click="modalBar = !modalBar" />
       </div>
       <Sucess v-if="store.notification" :title="'Sucesso'" :message="'Produto adicionado ao carrinho'"
         class="fixed z-50 top-40 left-12 shadow-md  h-20 rounded-sm transition-all" />
