@@ -35,9 +35,11 @@ const totalLength = ref();
 const selectedProduct = computed(() => {
   if (!store.responseUrl) {
     store.getApi();
+  }else{
+    window.scroll(0,0);
+    return store.responseUrl.find((item) => item._id === Number(route.params.id));
   }
-
-  return store.responseUrl.find((item) => item._id === Number(route.params.id));
+ 
 });
 async function getComments() {
   const { data } = await instance(`comments/${route.params.id}`);
@@ -77,6 +79,8 @@ async function insertComment() {
   } catch (error) {}
 }
 onMounted(async () => {
+
+
   getComments();
 });
 </script>
@@ -98,7 +102,7 @@ onMounted(async () => {
             {{ selectedProduct.title }}
           </h1>
           <div
-          
+          v-if="voteUser"
           >
             <h3>Nota: {{ (voteUser/totalLength).toFixed(1)}}</h3>
      
