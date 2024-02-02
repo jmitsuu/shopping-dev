@@ -37,7 +37,7 @@ onMounted(() => {
         </template>
         <template #prod>
             <div class="" v-for="item in results" :key="item._id">
-                <Products :title="item.title" :items="item" :img="item.image_url" :price="item.price" :id="item._id" />
+                <Products :title="item.title" :items="item" :img="item.image_url" :price="item.price" :id="item._id" :idPro="item._id" />
 
             </div>
         </template>

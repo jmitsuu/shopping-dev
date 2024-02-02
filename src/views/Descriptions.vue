@@ -21,7 +21,8 @@ const voteUser = ref(0);
 const inputVote = ref();
 const inputComment = ref();
 const modalComments = ref();
-const totalLength = ref()
+const totalLength = ref();
+
 // async function getCep() {
 //   const { data } = await axios.get(
 //     `https://viacep.com.br/ws/${inputCep.value.trim().replace("-", "")}/json/`
@@ -45,8 +46,11 @@ const total = comments.value.map((el) =>  el.voto);
 totalLength.value = data.length;
 console.log(totalLength.value)
 for(let i = 0; i < total.length; i++ ){
-  voteUser.value += total[i]
-  console.log(voteUser.value)
+
+  let soma = 0
+  voteUser.value  += total[i];
+  
+
 }
 
 }
@@ -93,8 +97,11 @@ onMounted(async () => {
           <h1 class="text-gray-700 xl:text-[1.8rem] text-center font-semibold">
             {{ selectedProduct.title }}
           </h1>
-          <div>
-            <h3>Nota: {{ voteUser/totalLength }}</h3>
+          <div
+          
+          >
+            <h3>Nota: {{ (voteUser/totalLength).toFixed(1)}}</h3>
+     
           </div>
 
           <h1 class="mt-4 text-[2.5rem] font-bold text-red-800">

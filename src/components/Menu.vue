@@ -30,6 +30,9 @@ async function getCredentials() {
   if (name.value) {
     logged.value = true
   }
+if(userToJson){
+  
+}
   const { data } = await instance.get('/admin', {
     headers: {
       'authorization': userToJson.tokenLocal

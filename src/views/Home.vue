@@ -86,6 +86,7 @@ onMounted(async () => {
           :img="item.image_url"
           :price="item.price"
           :id="item._id"
+          :idPro="item._id"
         />
         
       </div>
