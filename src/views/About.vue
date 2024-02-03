@@ -1,7 +1,6 @@
 <script setup>
 import axios from "axios";
-import {ref} from "vue";
-
+import { ref } from "vue";
 </script>
 
 <template>

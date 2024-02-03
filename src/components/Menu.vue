@@ -1,8 +1,9 @@
 <script setup>
 
 import { RouterLink, RouterView } from 'vue-router'
-import * as I from '@heroicons/vue/24/solid';
-import * as IL from '@heroicons/vue/24/outline';
+
+import {Bars4Icon, ChevronUpIcon, ChevronDownIcon, ShoppingCartIcon, UserIcon} from  '@heroicons/vue/24/solid';
+import {XCircleIcon} from '@heroicons/vue/24/outline';
 import { ref, onMounted } from "vue";
 import { onClickOutside } from '@vueuse/core';
 import instance from '../http/getUrl';
@@ -78,15 +79,15 @@ onMounted(() => {
     <div class="xl:flex w-full h-full  justify-center items-center">
       <h2 v-if="name" class="hidden xl:block text-slate-300"> Olá, <span class="text-orange-600">{{ name }}</span> </h2>
       <div>
-        <I.Bars4Icon class="h-10 mt-5 cursor-pointer absolute xl:hidden text-white"  @click="modalBar = !modalBar" />
+        <Bars4Icon class="h-10 mt-5 cursor-pointer absolute xl:hidden text-white"  @click="modalBar = !modalBar" />
       </div>
       <Sucess v-if="store.notification" :title="'Sucesso'" :message="'Produto adicionado ao carrinho'"
         class="fixed z-50 top-40 left-12 shadow-md  h-20 rounded-sm transition-all" />
       <nav class=" hidden xl:flex relative w-full container h-full  text-slate-300   justify-center items-center gap-5 ">
         <RouterLink class="" to="/">Home</RouterLink>
         <div class="relative flex items-center gap-1">
-          <I.ChevronUpIcon v-if="!modal2" class="h-4" />
-          <I.ChevronDownIcon v-if="modal2" class="h-4" />
+          <ChevronUpIcon v-if="!modal2" class="h-4" />
+          <ChevronDownIcon v-if="modal2" class="h-4" />
           <h1 @click="modal2 = !modal2" class="cursor-pointer flex items-center gap-1" >Vestuário
 
           </h1>
@@ -103,16 +104,16 @@ onMounted(() => {
         </RouterLink>
         <div class="right-28 absolute gap-10  flex items-center ">
       <div class="relative">
-        <I.ShoppingCartIcon @click="store.modalCart = !store.modalCart"
+        <ShoppingCartIcon @click="store.modalCart = !store.modalCart"
             class="h-6 cursor-pointer text-orange-600 z-50 hover:text-orange-200" />
           <span class="absolute bottom-4 right-0 text-xs text-slate-300 " v-if="store.countCart">{{ store.countCart }}</span>
       </div>
           <RouterLink to="/auth/acesso/" class="right-14 absolute flex items-center" v-if="!logged">
             <span class="text-sm w-36">Entre ou Cadastre-se</span>
-            <I.UserIcon class="h-6 mr-1 text-sm text-orange-600" />
+            <UserIcon class="h-6 mr-1 text-sm text-orange-600" />
           </RouterLink>
           <RouterLink to="/" class="flex items-center" @click="logout" v-else>
-            <I.UserIcon class="h-4 mr-3 text-sm text-orange-600" /> Sair
+            <UserIcon class="h-4 mr-3 text-sm text-orange-600" /> Sair
           </RouterLink>
         </div>
 
@@ -122,7 +123,7 @@ onMounted(() => {
         class="xl:hidden flex-col  flex  xl:p-0 absolute  bg-white h-screen xl:bg-white rounded-md  font-semibold text-slate-700  text-2xl z-50 w-screen xl:w-full container   xl:text-slate-800    gap-5 xl:text-[0.8rem]">
         <div class="h-20 w-full flex justify-between items-center bg-black">
           <h1 class="font-semibold text-gray-100 text-center border-b-2 ml-4">Shopping <span class="text-orange-700">Oriaj</span></h1>
-           <IL.XCircleIcon class="text-white h-8 mr-4 cursor-pointer" @click="modalBar =false" />
+           <XCircleIcon class="text-white h-8 mr-4 cursor-pointer" @click="modalBar =false" />
         </div>
         <div class="gap-10 flex flex-col  p-2 m-2">
           <div>
@@ -135,8 +136,8 @@ onMounted(() => {
 
       
           <h1  class="cursor-pointer flex  gap-1 " >Vestuário
-            <I.ChevronUpIcon v-if="!modal1" class="h-4 absolute top-2 right-4 qq" />
-          <I.ChevronDownIcon v-else class="h-4  absolute top-2 right-4" />
+            <ChevronUpIcon v-if="!modal1" class="h-4 absolute top-2 right-4 qq" />
+          <ChevronDownIcon v-else class="h-4  absolute top-2 right-4" />
           
 
           </h1>
@@ -168,7 +169,7 @@ onMounted(() => {
       </nav>
     </Transition>
     <div class="absolute right-5 top-8 xl:hidden md:block ">
-    <I.ShoppingCartIcon @click="store.modalCart = !store.modalCart"
+    <ShoppingCartIcon @click="store.modalCart = !store.modalCart"
             class="h-6 cursor-pointer text-orange-600 z-50 hover:text-orange-200" />
           <span class="absolute bottom-4 right-0 text-xs text-gray-600"  v-if="store.countCart">{{ store.countCart }}</span>
   </div>

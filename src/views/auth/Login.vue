@@ -1,11 +1,8 @@
 <script setup>
 import { ref } from "vue";
 import { EyeIcon } from "@heroicons/vue/24/solid";
-import axios from "axios";
 import instance from "../../http/getUrl";
-import { useProduct } from "../../stores/storeProducts";
 import Alert from "../../components/notifications/Alert.vue";
-const store = useProduct();
 const showpassord = ref(false);
 const userEmail = ref("");
 const userPassword = ref("");
@@ -31,24 +28,26 @@ async function singIn() {
     });
     if (data.status === 200) {
       localStorage.setItem(
-      "credentials",
-      JSON.stringify({ userName: data.data.userName, tokenLocal: data.data.token, id:data.data.id_user })
-    );
+        "credentials",
+        JSON.stringify({
+          userName: data.data.userName,
+          tokenLocal: data.data.token,
+          id: data.data.id_user,
+        })
+      );
 
-    userMessage.value = data.data.message
+      userMessage.value = data.data.message;
       setTimeout(() => {
-        window.location.href = '/'
+        window.location.href = "/";
       }, 1100);
- 
     }
   } catch ({ response }) {
-    userMessage.value = response.data.message
+    userMessage.value = response.data.message;
   }
 }
-
 </script>
 <template>
-  <main class="container m-auto flex  p-4 gap-10 pt-20 relative">
+  <main class="container m-auto flex p-4 gap-10 pt-20 relative">
     <Alert v-if="alertFields" :message="'Preencha todos os campos'" />
     <div class="p-2 w-full flex flex-col items-center justify-center gap-4">
       <form
@@ -57,7 +56,7 @@ async function singIn() {
       >
         <h1 class="font-bold uppercase text-gray-800 text-6xl text-right block">
           <span
-            class="border-b-4 border-red-400  h-2 font-extrabold text-gray-900"
+            class="border-b-4 border-red-400 h-2 font-extrabold text-gray-900"
             >Login</span
           >
         </h1>
@@ -76,7 +75,7 @@ async function singIn() {
         <div class="relative md:w-96">
           <input
             :type="!showpassord ? 'password' : ' text'"
-            class="border-b outline-none  md:w-96 text-red-600 mt-4 pb-2"
+            class="border-b outline-none md:w-96 text-red-600 mt-4 pb-2"
             placeholder="Sua Senha"
             v-model="userPassword"
           />

@@ -15,7 +15,7 @@ const props = defineProps({
   <div
 
     class="bg-[#F8F8FF]   rounded-md text-slate-50 py-36 px-20  bg-cover contrast-125  justify-center items-center flex flex-col  xl:h-[500px] h-full bg-top bg-no-repeat"
-    :class="img == 'male' ? `bg-[url('../assets/images/male/bg.jpg')]` : `bg-[url('../assets/images/female/bg.jpg')]`">
+    :class="img == 'male' ? `bg-[url('https://jairo3478.c35.integrator.host/images/genere/male/bg.jpg')]` : `bg-[url('https://jairo3478.c35.integrator.host/images/genere/female/bg.jpg')]`">
   
     <h1 class="text-[3.5rem] font-bold">
     

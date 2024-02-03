@@ -5,7 +5,6 @@ import {
   Square3Stack3DIcon,
   ShoppingCartIcon,
 } from "@heroicons/vue/24/solid";
-import axios from "axios";
 import { ref, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import instance from "../http/getUrl";
@@ -14,7 +13,6 @@ const route = useRoute();
 const modal = ref(false);
 const qtd = ref(1);
 const inputCep = ref("88113500");
-const dataLocal = ref();
 const priceSplit = ref();
 const comments = ref();
 const voteUser = ref(0);
@@ -35,26 +33,23 @@ const totalLength = ref();
 const selectedProduct = computed(() => {
   if (!store.responseUrl) {
     store.getApi();
-  }else{
-    window.scroll(0,0);
-    return store.responseUrl.find((item) => item._id === Number(route.params.id));
+  } else {
+    window.scroll(0, 0);
+    return store.responseUrl.find(
+      (item) => item._id === Number(route.params.id)
+    );
   }
- 
 });
 async function getComments() {
   const { data } = await instance(`comments/${route.params.id}`);
   comments.value = data || null;
-const total = comments.value.map((el) =>  el.voto);
-totalLength.value = data.length;
-console.log(totalLength.value)
-for(let i = 0; i < total.length; i++ ){
-
-  let soma = 0
-  voteUser.value  += total[i];
-  
-
-}
-
+  const total = comments.value.map((el) => el.voto);
+  totalLength.value = data.length;
+  console.log(totalLength.value);
+  for (let i = 0; i < total.length; i++) {
+    let soma = 0;
+    voteUser.value += total[i];
+  }
 }
 async function insertComment() {
   const body = {
@@ -79,8 +74,6 @@ async function insertComment() {
   } catch (error) {}
 }
 onMounted(async () => {
-
-
   getComments();
 });
 </script>
@@ -101,11 +94,8 @@ onMounted(async () => {
           <h1 class="text-gray-700 xl:text-[1.8rem] text-center font-semibold">
             {{ selectedProduct.title }}
           </h1>
-          <div
-          v-if="voteUser"
-          >
-            <h3>Nota: {{ (voteUser/totalLength).toFixed(1)}}</h3>
-     
+          <div v-if="voteUser">
+            <h3>Nota: {{ (voteUser / totalLength).toFixed(1) }}</h3>
           </div>
 
           <h1 class="mt-4 text-[2.5rem] font-bold text-red-800">
@@ -193,37 +183,35 @@ onMounted(async () => {
               Avaliações mais recentes
             </h1>
             <div class="border-b-2 h-[260px] p-4 overflow-auto">
-
-          
-            <div
-              class="flex flex-col overflow-auto border-black mt-6 gap-10"
-              v-for="comment in comments"
-              :key="comment.id_comentario"
-            >
-              <div class="flex gap-10 border-b-2 pb-4">
-                <div class="">
-                  <h1 class="text-gray-400 text-md w-32 font-bold">
-                    {{ comment.name }}
-                  </h1>
-                  <p class="text-gray-300 font-semibold text-xs">
-                    {{ comment.data_insercao.slice(0, -9) }}
-                  </p>
-                </div>
-                <div class="w-full">
-                  <div class="flex">
-                    <div
-                      class="flex"
-                      v-for="stars of comment.voto"
-                      :key="stars"
-                    >
-                      <div><StarIcon class="h-3 w-3 text-yellow-600" /></div>
-                    </div>
+              <div
+                class="flex flex-col overflow-auto border-black mt-6 gap-10"
+                v-for="comment in comments"
+                :key="comment.id_comentario"
+              >
+                <div class="flex gap-10 border-b-2 pb-4">
+                  <div class="">
+                    <h1 class="text-gray-400 text-md w-32 font-bold">
+                      {{ comment.name }}
+                    </h1>
+                    <p class="text-gray-300 font-semibold text-xs">
+                      {{ comment.data_insercao.slice(0, -9) }}
+                    </p>
                   </div>
-                  <p class="mt-4 text-xs">{{ comment.comentario }}</p>
+                  <div class="w-full">
+                    <div class="flex">
+                      <div
+                        class="flex"
+                        v-for="stars of comment.voto"
+                        :key="stars"
+                      >
+                        <div><StarIcon class="h-3 w-3 text-yellow-600" /></div>
+                      </div>
+                    </div>
+                    <p class="mt-4 text-xs">{{ comment.comentario }}</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
             <div class="flex flex-col mt-10">
               <RouterLink
                 to="/auth/acesso"
@@ -240,7 +228,7 @@ onMounted(async () => {
               </button>
               <div
                 v-if="modalComments"
-                class="h-full w-full mt-2  xl:p-4 rounded-md border-[0.1rem]"
+                class="h-full w-full mt-2 xl:p-4 rounded-md border-[0.1rem]"
               >
                 <div class="flex p-2 gap-2">
                   <div
@@ -323,7 +311,4 @@ onMounted(async () => {
   </section>
 </template>
 
-<style scoped>
-
-
-</style>
+<style scoped></style>
