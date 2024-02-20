@@ -10,17 +10,24 @@ import {
   ShoppingBagIcon,
   CheckBadgeIcon,
 } from "@heroicons/vue/24/solid";
+
 import { useProduct } from "../stores/storeProducts";
 const store = useProduct();
 const slides = [
   {
     img: "https://jairo3478.c35.integrator.host/images/bg/b1.jpg",
+    title: "Estilo para o ano todo",
+    text: "Encontre a sua melhor versão.",
   },
   {
     img: "https://jairo3478.c35.integrator.host/images/bg/b2.jpg",
+    title: "Surpreenda",
+    text: "Presenteie a pessoa que está ao seu lado.",
   },
   {
     img: "https://jairo3478.c35.integrator.host/images/bg/b3.jpg",
+    title: "Moda para todos os gostos",
+    text: "Confira os produtos com a melhor qualidade do mercado.",
   },
 ];
 
@@ -33,22 +40,38 @@ onMounted(async () => {
   <main class="">
     <carousel
       :items-to-show="1"
-      :transition="900"
+      :transition="10000"
       :autoplay="3000"
       :wrapAround="true"
-      class="m-auto pt-20 container"
+      class="m-auto relative"
     >
-      <slide v-for="slide in slides" :key="slide">
-        <img
-          class="xl:h-[500px] md:h-[300px] w-full object-cover h-[300px]"
-          :src="slide.img"
-        />
+      <slide v-for="slide in slides" :key="slide" class="">
+        <div class="w-full h-full relative flex 0 z-50 backdrop-opacity-10">
+          <img
+            class="xl:h-[600px] md:h-[300px] w-full contrast-125 object-cover h-[300px]"
+            :src="slide.img"
+          />
+          <div
+            class="absolute z-50 bg-gradient-to-tr from-black/90 h-full w-full backdrop-blur-sm"
+          >
+            <div class="right-4 top-16 absolute text-left">
+              <h1
+                class="text-slate-200 border-b-2 xl:text-8xl text-4xl font-bold uppercase"
+              >
+                {{ slide.title }}
+              </h1>
+              <p class="font-semibold text-3xl text-slate-300 mt-5">
+                {{ slide.text }}
+              </p>
+            </div>
+          </div>
+        </div>
       </slide>
     </carousel>
 
-    <div class="flex justify-center md:container md:p-0 mt-5 p-4 m-auto">
+    <div class="flex justify-center md:p-0 p-4 m-auto">
       <div
-        class="rounded-md mx-auto p-3 text-white justify-center xl:gap-36 md:items-center flex md:flex-row flex-col w-full bg-black/80"
+        class="mx-auto p-3 text-white justify-center xl:gap-36 md:items-center flex md:flex-row flex-col w-full bg-gradient-to-r bg-black"
       >
         <div class="flex md:justify-center items-center">
           <TruckIcon class="h-10 ml-2" />

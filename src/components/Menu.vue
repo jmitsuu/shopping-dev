@@ -16,6 +16,9 @@ import { onClickOutside } from "@vueuse/core";
 import instance from "../http/getUrl";
 import { useCart } from "../stores/cart";
 import Sucess from "./notifications/Sucess.vue";
+import Instagram from "./icons/Instagram.vue";
+import Facebook from "./icons/Facebook.vue";
+import Linkedin from "./icons/Linkedin.vue";
 const modal1 = ref(false);
 const modal2 = ref(false);
 const target = ref(null);
@@ -70,12 +73,13 @@ async function logout() {
 function closeModal() {
   (modalBar.value = false), (modal1.value = false);
 }
+
 onMounted(() => {
   getCredentials();
 });
 </script>
 <template>
-  <header class="w-full h-20 fixed -mt-5 z-50 bg-black">
+  <header class="w-full bg-black h-20 relative z-50">
     <div class="xl:flex w-full h-full justify-center items-center">
       <h2 v-if="name" class="hidden xl:block text-slate-300">
         Olá, <span class="text-orange-600">{{ name }}</span>
@@ -93,7 +97,7 @@ onMounted(() => {
         class="fixed z-50 top-40 left-12 shadow-md h-20 rounded-sm transition-all"
       />
       <nav
-        class="hidden xl:flex relative w-full container h-full text-slate-300 justify-center items-center gap-5"
+        class="hidden xl:flex fixed bg-black w-full h-20 text-slate-300 justify-center items-center gap-5"
       >
         <RouterLink class="flex items-center gap-1" to="/"
           ><HomeIcon class="h-4" /> Home</RouterLink
